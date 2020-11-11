@@ -70,7 +70,7 @@ export default function LoginScreen({navigation}) {
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onLoginPress()}>
-                    <Text style={styles.buttonTitle}>Log in</Text>
+                    <Text style={styles.buttonTitle}>Log in - Amine</Text>
                 </TouchableOpacity>
                 <View style={styles.footerView}>
                     <Text style={styles.footerText}>Don't have an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
