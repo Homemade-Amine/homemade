@@ -13,7 +13,10 @@ const firebaseConfig = {
 };
 
 if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
+
+  firebase.initializeApp(firebaseConfig);
+  //firebase.firestore().enablePersistence();
+
 }
 
 export { firebase };

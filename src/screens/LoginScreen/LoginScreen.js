@@ -1,18 +1,24 @@
 import React, { useState } from 'react'
-import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Image, Text, TextInput, TouchableOpacity, View, ScrollView, Button } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
-import { firebase } from '../../firebase/config'
+import { firebase } from '../../firebase/config';
 
 export default function LoginScreen({navigation}) {
+    
+  
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
 
     const onFooterLinkPress = () => {
         navigation.navigate('Registration')
     }
 
     const onLoginPress = () => {
+
+        
+
         firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
@@ -28,6 +34,7 @@ export default function LoginScreen({navigation}) {
                             return;
                         }
                         const user = firestoreDocument.data()
+                        
                         navigation.navigate('Home', {user})
                     })
                     .catch(error => {
@@ -37,16 +44,28 @@ export default function LoginScreen({navigation}) {
             .catch(error => {
                 alert(error)
             })
+
+            
+    }
+
+    const onForgotPassword = () => {
+        if(email == ""){
+            alert("Please enter an email to set a new password.")
+            return;
+        }
+        else{
+            return firebase.auth().sendPasswordResetEmail(email)
+        }
+        
     }
 
     return (
         <View style={styles.container}>
-            <KeyboardAwareScrollView
-                style={{ flex: 1, width: '100%' }}
-                keyboardShouldPersistTaps="always">
+            <ScrollView style={styles.scrollView}> 
+                
                 <Image
                     style={styles.logo}
-                    source={require('../../../assets/icon.png')}
+                    source={require('../../../assets/logo_homemade.png')}
                 />
                 <TextInput
                     style={styles.input}
@@ -70,12 +89,28 @@ export default function LoginScreen({navigation}) {
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onLoginPress()}>
-                    <Text style={styles.buttonTitle}>Log in - Amine</Text>
+                    <Text style={styles.buttonTitle}>Log in</Text>
                 </TouchableOpacity>
                 <View style={styles.footerView}>
                     <Text style={styles.footerText}>Don't have an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
                 </View>
-            </KeyboardAwareScrollView>
+
+
+
+                {/*
+                <GoogleSigninButton
+                    style={{ width: 192, height: 48 }}
+                    size={GoogleSigninButton.Size.Wide}
+                    color={GoogleSigninButton.Color.Dark}
+                    onPress={this._signIn}
+                    disabled={this.state.isSigninInProgress}
+                />*/}
+
+                <Button
+                    title="Forgot password ?"
+                    onPress={() => onForgotPassword()}
+                />
+            </ScrollView>
         </View>
     )
 }

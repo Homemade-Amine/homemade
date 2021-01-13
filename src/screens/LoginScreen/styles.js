@@ -5,13 +5,15 @@ export default StyleSheet.create({
         flex: 1,
         alignItems: 'center'
     },
-    title: {
 
+    scrollView : {
+        flex: 1, 
+        width: '100%' 
     },
     logo: {
         flex: 1,
         height: 120,
-        width: 90,
+        width: 140,
         alignSelf: "center",
         margin: 30
     },
@@ -27,7 +29,7 @@ export default StyleSheet.create({
         paddingLeft: 16
     },
     button: {
-        backgroundColor: '#788eec',
+        backgroundColor: '#87DA54',
         marginLeft: 30,
         marginRight: 30,
         marginTop: 20,
@@ -37,7 +39,7 @@ export default StyleSheet.create({
         justifyContent: 'center'
     },
     buttonTitle: {
-        color: 'white',
+        color: '#763C0B',
         fontSize: 16,
         fontWeight: "bold"
     },
@@ -51,8 +53,9 @@ export default StyleSheet.create({
         color: '#2e2e2d'
     },
     footerLink: {
-        color: "#788eec",
+        color: "#763C0B",
         fontWeight: "bold",
         fontSize: 16
-    }
+    },
+
 })

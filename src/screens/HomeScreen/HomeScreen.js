@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { FlatList, Keyboard, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { FlatList, Keyboard, Text, TextInput, TouchableOpacity, View, Button } from 'react-native'
 import styles from './styles';
 import { firebase } from '../../firebase/config'
+import { useNavigation } from '@react-navigation/native';
 
 export default function HomeScreen(props) {
 
     const [entityText, setEntityText] = useState('')
     const [entities, setEntities] = useState([])
+    const navigation = useNavigation();
+
+
 
     const entityRef = firebase.firestore().collection('entities')
     const userID = props.extraData.id
@@ -64,9 +68,17 @@ export default function HomeScreen(props) {
         )
     }
 
+    const onLogOut = () => {
+        
+        firebase.auth().signOut()
+        
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.formContainer}>
+
+                
                 <TextInput
                     style={styles.input}
                     placeholder='Add new entity'
@@ -79,7 +91,13 @@ export default function HomeScreen(props) {
                 <TouchableOpacity style={styles.button} onPress={onAddButtonPress}>
                     <Text style={styles.buttonText}>Add</Text>
                 </TouchableOpacity>
+
+
             </View>
+            <Button
+                    title="Log out"
+                    onPress={() => onLogOut()}
+            />
             { entities && (
                 <View style={styles.listContainer}>
                     <FlatList
